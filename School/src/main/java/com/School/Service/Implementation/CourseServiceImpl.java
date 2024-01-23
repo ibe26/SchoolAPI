@@ -38,7 +38,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Optional<Course> addCourse(CourseDto courseDto) {
        if(courseDto!=null){
-           if(classroomRepository.existsById(courseDto.classroomId()))
+           if(classroomRepository.findById(courseDto.classroomId()).isPresent())
            {
                Course course=new Course();
                Classroom classroom=classroomRepository.findById(courseDto.classroomId()).get();
