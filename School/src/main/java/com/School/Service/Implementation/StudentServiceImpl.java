@@ -56,7 +56,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Optional<Student> updateStudent(StudentDto studentDto, Long id) {
-        if(id>0 && studentRepository.existsById(id)){
+        if(id>0 && studentRepository.findById(id).isPresent()){
             Student student=studentRepository.findById(id).get();
             student.setId(id);
             student.setFirstName(studentDto.firstName());

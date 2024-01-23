@@ -31,7 +31,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Optional<Course> getCourseById(Long id) {
-        return courseRepository.existsById(id) ? courseRepository.findById(id) : null;
+        return courseRepository.existsById(id) ? courseRepository.findById(id) : Optional.empty();
 
     }
 
@@ -49,7 +49,7 @@ public class CourseServiceImpl implements CourseService {
            }
 
        }
-       return null;
+       return Optional.empty();
     }
 
     @Override
@@ -63,13 +63,13 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Optional<Course> updateCourse(CourseDto courseDto, Long id) {
-        if(courseDto!=null && courseRepository.existsById(id) && classroomRepository.existsById(courseDto.classroomId())){
+        if(courseDto!=null && courseRepository.findById(id).isPresent() && classroomRepository.findById(courseDto.classroomId()).isPresent()){
             Course course=courseRepository.findById(id).get();
             Classroom classroom=classroomRepository.findById(courseDto.classroomId()).get();
             course.setName(courseDto.name());
             course.setClassroom(classroom);
             return Optional.of(courseRepository.save(course));
         }
-        return null;
+        return Optional.empty();
     }
 }
