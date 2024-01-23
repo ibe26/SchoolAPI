@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -26,17 +27,21 @@ public class StudentServiceImpl implements StudentService {
     public Collection<Student> getStudents() {
         return studentRepository.findAll();
     }
+    @Override
+    public Optional<Student> getStudentById(Long id){
+        return studentRepository.existsById(id) ? studentRepository.findById(id) : Optional.empty();
+    }
 
     @Override
-    public Student addStudent(StudentDto studentDto) {
+    public Optional<Student> addStudent(StudentDto studentDto) {
         if(studentDto!=null){
             Student student=new Student();
             student.setFirstName(studentDto.firstName());
             student.setLastName(studentDto.lastName());
             student.setCourses(studentDto.courses());
-           return studentRepository.save(student);
+           return Optional.of(studentRepository.save(student));
         }
-        return null;
+        return Optional.empty();
     }
 
     @Override
@@ -50,27 +55,32 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student updateStudent(StudentDto studentDto, Long id) {
+    public Optional<Student> updateStudent(StudentDto studentDto, Long id) {
         if(id>0 && studentRepository.existsById(id)){
             Student student=studentRepository.findById(id).get();
+            student.setId(id);
             student.setFirstName(studentDto.firstName());
             student.setLastName(studentDto.lastName());
             student.setCourses(studentDto.courses());
             studentRepository.save(student);
-            return student;
+            return Optional.of(student);
         }
-        return null;
+        return Optional.empty();
     }
 
     @Override
-    public Student addCourse(Long studentId, Long courseId) {
-        if(courseId>0 && courseRepository.existsById(courseId) && studentRepository.existsById(studentId))
+    public Optional<Student> addCourse(Long studentId, Long courseId) {
+        if(courseId>0 && courseRepository.findById(courseId).isPresent() && studentRepository.findById(studentId).isPresent())
         {
             Course course=courseRepository.findById(courseId).get();
             Student student=studentRepository.findById(studentId).get();
-            student.addCourse(course);
-            return  studentRepository.save(student);
+            if(!student.getCourses().contains(course))
+            {
+                student.addCourse(course);
+                return Optional.of(studentRepository.save(student));
+            }
+
         }
-        return null;
+        return Optional.empty();
     }
 }

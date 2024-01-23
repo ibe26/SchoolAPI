@@ -1,10 +1,8 @@
 package com.School.Model.Classroom;
 
-import com.School.Model.Course.Course;
-import com.School.Model.Student.Student;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Formula;
 
-import java.util.Collection;
 
 @Entity
 @Table(name = "Classroom")
@@ -14,10 +12,13 @@ public class Classroom {
     @Column(name = "classroom_id")
     private Long id;
     private String name;
-    @OneToMany
-    private Collection<Course> courses;
-    @OneToMany
-    private  Collection<Student> students;
+    @Formula(value = "(SELECT COUNT(*) FROM (SELECT * FROM Student as s\n" +
+            "JOIN student_course as sc\n" +
+            "ON sc.student_id=s.student_id) as result\n" +
+            "JOIN course as c\n" +
+            "ON result.course_id=c.course_id\n" +
+            "where c.classroom_id=classroom_id)")
+    private Long studentCount;
 
     public Long getId() {
         return id;
@@ -35,19 +36,12 @@ public class Classroom {
         this.name = name;
     }
 
-    public Collection<Course> getCourses() {
-        return courses;
+
+    public Long getStudentCount() {
+        return studentCount;
     }
 
-    public void setCourses(Collection<Course> courses) {
-        this.courses = courses;
-    }
-
-    public Collection<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(Collection<Student> students) {
-        this.students = students;
+    public void setStudents(Long studentCount) {
+        this.studentCount = studentCount;
     }
 }

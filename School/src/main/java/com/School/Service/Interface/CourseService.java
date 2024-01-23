@@ -5,11 +5,13 @@ import com.School.Model.Course.CourseDto;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Service
 public interface CourseService {
     Collection<Course> getCourses();
-    Course addCourse(CourseDto CourseDto);
+    Optional<Course> getCourseById(Long id);
+    Optional<Course> addCourse(CourseDto courseDto);
     Long deleteCourse(Long id);
-    Course updateCourse(CourseDto CourseDto,Long id);
+    Optional<Course> updateCourse(CourseDto courseDto,Long id);
 }

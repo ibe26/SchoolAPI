@@ -5,12 +5,14 @@ import com.School.Model.Student.StudentDto;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Service
 public interface StudentService {
     Collection<Student> getStudents();
-    Student addStudent(StudentDto studentDto);
+    Optional<Student> getStudentById(Long id);
+    Optional<Student> addStudent(StudentDto studentDto);
     Long deleteStudent(Long id);
-    Student updateStudent(StudentDto studentDto,Long id);
-    Student  addCourse(Long studentId,Long courseId);
+    Optional<Student> updateStudent(StudentDto studentDto,Long id);
+    Optional<Student>  addCourse(Long studentId,Long courseId);
 }
