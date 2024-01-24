@@ -53,7 +53,7 @@ public class StudentController {
         return studentOptional.isPresent() ? new ResponseEntity<>(studentOptional.get(),HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @CacheEvict(cacheNames = "student",key = "#courseId")
+    @CacheEvict(cacheNames = "student",key = "#studentId")
     @PostMapping("/saveCourse/{id}")
     public ResponseEntity<?> saveCourse(@PathVariable("id") Long studentId, @RequestBody Long courseId){
         Optional<Student> studentOptional=studentService.addCourse(studentId,courseId);
