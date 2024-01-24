@@ -7,6 +7,9 @@ import com.School.Repository.ClassroomRepository;
 import com.School.Repository.CourseRepository;
 import com.School.Service.Interface.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -25,17 +28,20 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    @CacheEvict(cacheNames = "course")
     public Collection<Course> getCourses() {
         return courseRepository.findAll();
     }
 
     @Override
+    @Cacheable(cacheNames = "course",key = "#id")
     public Optional<Course> getCourseById(Long id) {
         return courseRepository.existsById(id) ? courseRepository.findById(id) : Optional.empty();
 
     }
 
     @Override
+    @CacheEvict(cacheNames = "course",allEntries = true)
     public Optional<Course> addCourse(CourseDto courseDto) {
        if(courseDto!=null){
            if(classroomRepository.findById(courseDto.classroomId()).isPresent())
@@ -53,6 +59,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    @CacheEvict(cacheNames = "course",key = "#id")
     public Long deleteCourse(Long id) {
         if(courseRepository.existsById(id)){
             courseRepository.deleteById(id);
@@ -62,6 +69,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    @CachePut(cacheNames = "course",key = "#id")
     public Optional<Course> updateCourse(CourseDto courseDto, Long id) {
         if(courseDto!=null && courseRepository.findById(id).isPresent() && classroomRepository.findById(courseDto.classroomId()).isPresent()){
             Course course=courseRepository.findById(id).get();
