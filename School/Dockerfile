@@ -1,0 +1,6 @@
+FROM postgres:latest
+
+ENV POSTGRES_DB=SchoolDB
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=ilker
+EXPOSE 5432
