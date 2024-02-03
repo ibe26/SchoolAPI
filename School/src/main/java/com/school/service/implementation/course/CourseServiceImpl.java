@@ -1,4 +1,4 @@
-package com.school.service.implementation;
+package com.school.service.implementation.course;
 
 import com.school.model.classroom.Classroom;
 import com.school.model.course.Course;
@@ -6,7 +6,7 @@ import com.school.dto.course.CourseDto;
 import com.school.repository.classroom.ClassroomRepository;
 import com.school.repository.course.CourseRepository;
 import com.school.repository.student.StudentRepository;
-import com.school.service.interfaces.CourseService;
+import com.school.service.interfaces.course.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;

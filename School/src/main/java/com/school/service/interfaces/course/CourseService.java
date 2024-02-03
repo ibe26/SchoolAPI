@@ -1,4 +1,4 @@
-package com.school.service.interfaces;
+package com.school.service.interfaces.course;
 
 import com.school.model.course.Course;
 import com.school.dto.course.CourseDto;

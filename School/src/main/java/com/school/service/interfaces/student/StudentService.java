@@ -1,4 +1,4 @@
-package com.school.service.interfaces;
+package com.school.service.interfaces.student;
 
 import com.school.model.student.Student;
 import com.school.dto.student.StudentDto;

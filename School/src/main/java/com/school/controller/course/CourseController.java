@@ -1,11 +1,10 @@
-package com.school.controller;
+package com.school.controller.course;
 
 import com.school.controller.RequestMappingHelper.Routes;
 import com.school.model.course.Course;
 import com.school.dto.course.CourseDto;
-import com.school.service.interfaces.CourseService;
+import com.school.service.interfaces.course.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +31,6 @@ public class CourseController {
         return courseOptional.isPresent() ? new ResponseEntity<>(courseOptional.get(),HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @CacheEvict(cacheNames = "course",allEntries = true)
     @PostMapping(Routes.save)
     public ResponseEntity<?> saveCourse(@RequestBody() CourseDto courseDto){
         Optional<Course> courseOptional=courseService.addCourse(courseDto);

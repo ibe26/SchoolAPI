@@ -1,11 +1,11 @@
-package com.school.service.implementation;
+package com.school.service.implementation.student;
 
 import com.school.model.course.Course;
 import com.school.model.student.Student;
 import com.school.dto.student.StudentDto;
 import com.school.repository.course.CourseRepository;
 import com.school.repository.student.StudentRepository;
-import com.school.service.interfaces.StudentService;
+import com.school.service.interfaces.student.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

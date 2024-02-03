@@ -1,6 +1,4 @@
-FROM postgres:latest
-
-ENV POSTGRES_DB=SchoolDB
-ENV POSTGRES_USER=postgres
-ENV POSTGRES_PASSWORD=ilker
-EXPOSE 5432
+FROM openjdk:17-alpine
+COPY target/school-docker.jar school-docker.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","school-docker.jar"]

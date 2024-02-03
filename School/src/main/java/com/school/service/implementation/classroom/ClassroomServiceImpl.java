@@ -1,9 +1,9 @@
-package com.school.service.implementation;
+package com.school.service.implementation.classroom;
 
 import com.school.model.classroom.Classroom;
 import com.school.dto.classroom.ClassroomDto;
 import com.school.repository.classroom.ClassroomRepository;
-import com.school.service.interfaces.ClassroomService;
+import com.school.service.interfaces.classroom.ClassroomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
