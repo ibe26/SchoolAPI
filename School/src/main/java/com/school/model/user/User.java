@@ -49,7 +49,7 @@ public class User implements UserDetails, CredentialsContainer {
 
     @Override
     public String getPassword() {
-        return null;
+        return this.password;
     }
 
     @Override

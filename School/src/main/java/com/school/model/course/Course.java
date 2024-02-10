@@ -1,6 +1,7 @@
 package com.school.model.course;
 
 import com.school.model.classroom.Classroom;
+import com.school.model.lecturer.Lecturer;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Formula;
 
@@ -15,6 +16,10 @@ public class Course {
     @ManyToOne
     @JoinColumn(name = "classroom_id")
     private Classroom classroom;
+
+    @ManyToOne
+    @JoinColumn(name = "lecturer_id")
+    private Lecturer lecturer;
 
     @Formula(value = "(SELECT COUNT(*) FROM student_course as sc WHERE sc.course_id=course_id)")
     private Long studentCount;
