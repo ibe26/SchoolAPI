@@ -1,6 +1,6 @@
 package com.school.controller.classroom;
 
-import com.school.controller.RequestMappingHelper.Routes;
+import com.school.controller.request_mapping_helper.Routes;
 import com.school.dto.classroom.ClassroomDto;
 import com.school.model.classroom.Classroom;
 import com.school.service.interfaces.classroom.ClassroomService;

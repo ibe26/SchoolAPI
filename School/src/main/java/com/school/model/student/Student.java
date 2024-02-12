@@ -1,12 +1,16 @@
 package com.school.model.student;
 
+import com.school.model.assessment.Assessment;
 import com.school.model.course.Course;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "Student")
+@Data
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,38 +26,14 @@ public class Student {
     )
     private Collection<Course> courses;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public Collection<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(Collection<Course> courses) {
-        this.courses = courses;
-    }
+    @OneToMany(targetEntity = Assessment.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "assessment_student_id", referencedColumnName = "student_id")
+    private List<Assessment> assessments;
     public void addCourse(Course course){
         this.courses.add(course);
+    }
+
+    public void assignAssessment(Assessment assessment){
+        this.assessments.add(assessment);
     }
 }

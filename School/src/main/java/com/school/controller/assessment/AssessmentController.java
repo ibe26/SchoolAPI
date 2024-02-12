@@ -16,8 +16,5 @@ public class AssessmentController {
         this.assessmentService = assessmentService;
     }
 
-    @PostMapping()
-    public ResponseEntity<Assessment> saveAssessment(@RequestBody AssessmentDto assessmentDto){
-        return ResponseEntity.ok(assessmentService.saveAssessment(assessmentDto));
-    }
+
 }

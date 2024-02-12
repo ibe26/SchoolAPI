@@ -1,4 +1,4 @@
-package com.school.controller.RequestMappingHelper;
+package com.school.controller.request_mapping_helper;
 
 public class Routes {
     public final static String getAll="/getAll";

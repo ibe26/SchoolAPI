@@ -26,7 +26,9 @@ public class AssessmentService {
             assessment.setName(assessmentDto.getName());
             assessment.setStudent(studentRepository.findById(assessmentDto.getStudentId()).orElseThrow(EntityNotFoundException::new));
             assessment.setCourse(courseRepository.findById(assessmentDto.getCourseId()).orElseThrow(EntityNotFoundException::new));
-
+            assessment.setWeightagePercentage(assessmentDto.getWeightagePercentage());
+            assessment.setName(assessmentDto.getName());
+            assessment.setScore(assessmentDto.getScore());
             return assessmentRepository.save(assessment);
         }
         else throw new IllegalArgumentException();

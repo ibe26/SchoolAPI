@@ -1,6 +1,6 @@
 package com.school.controller.student;
 
-import com.school.controller.RequestMappingHelper.Routes;
+import com.school.controller.request_mapping_helper.Routes;
 import com.school.dto.student.SaveCourseDto;
 import com.school.model.student.Student;
 import com.school.dto.student.StudentDto;
